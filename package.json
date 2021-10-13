@@ -1,0 +1,13 @@
+{
+  "name": "incubator-tuya",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:AldoLopez/incubator-tuya.git",
+  "author": "Aldo Lopez <lopez.aldo.a@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "tuyapi": "codetheweb/tuyapi",
+    "node-dht-sensor": "^0.4.3"
+  }
+}
