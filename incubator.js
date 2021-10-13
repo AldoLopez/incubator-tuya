@@ -8,24 +8,29 @@ const device = new TuyAPI({
   issueGetOnConnect: false,
 });
 
+const MAX_TEMP = 120;
+const MIN_TEMP = 85;
+const SENSOR_TYPE = 22;
+const PIN_LOCATION = 4;
+
 async function exec() {
   try {
     await device.find();
     await device.connect();
 
-    let status = await device.get();
-    console.log(`Current status: ${status}`);
+    let on = await device.get();
+    console.log(`Current status: ${on}`);
 
     try {
-      const res = await sensor.read(22, 4);
+      const res = await sensor.read(SENSOR_TYPE, PIN_LOCATION);
       const fTemp = res.temperature * (9 / 5) + 32;
       console.log(
         `Temp: ${fTemp.toFixed(1)}°C\nHumidity: ${res.humidity.toFixed(1)}%`
       );
-      if (fTemp > 60 && status) {
+      if (fTemp > MAX_TEMP && on) {
         console.log('cooling down');
         await device.set({ set: false });
-      } else if (fTemp < 85 && !status) {
+      } else if (fTemp < MIN_TEMP && !on) {
         console.log('heating up');
         await device.set({ set: true });
       }
