@@ -9,8 +9,8 @@ const device = new TuyAPI({
 });
 
 const INTERVAL = 300000;
-const MAX_TEMP = 120;
-const MIN_TEMP = 85;
+const MAX_TEMP = 98;
+const MIN_TEMP = 80;
 const SENSOR_TYPE = 22;
 const PIN_LOCATION = 4;
 
