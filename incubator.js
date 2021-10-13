@@ -14,11 +14,14 @@ const MIN_TEMP = 85;
 const SENSOR_TYPE = 22;
 const PIN_LOCATION = 4;
 
+async function connect() {
+  await device.find();
+  await device.connect();
+}
+
 async function exec() {
   try {
-    await device.find();
-    await device.connect();
-
+    await connect();
     let on = await device.get();
     console.log(`Current status: ${on}`);
 
@@ -48,8 +51,11 @@ async function exec() {
 const startDate = new Date();
 const endDate = new Date(new Date().getTime() + 60 * 60 * 1000 * 48);
 console.log(`Ending on ${endDate.toISOString()}`);
-setInterval(() => {
+setInterval(async () => {
   if (startDate < endDate) {
     exec();
+  } else {
+    await connect();
+    await device.set({ set: false });
   }
 }, INTERVAL);
