@@ -29,7 +29,7 @@ async function exec() {
       const res = await sensor.read(SENSOR_TYPE, PIN_LOCATION);
       const fTemp = res.temperature * (9 / 5) + 32;
       console.log(
-        `Temp: ${fTemp.toFixed(1)}°C\nHumidity: ${res.humidity.toFixed(1)}%`
+        `Temp: ${fTemp.toFixed(1)}°F\nHumidity: ${res.humidity.toFixed(1)}%`
       );
       if (fTemp > MAX_TEMP && on) {
         console.log('cooling down');
