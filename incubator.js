@@ -49,7 +49,7 @@ async function exec() {
 }
 
 const startDate = new Date();
-const endDate = new Date(new Date().getTime() + 60 * 60 * 1000 * 48);
+const endDate = new Date(new Date().getTime() + 60 * 60 * 1000 * 24);
 console.log(`Ending on ${endDate.toISOString()}`);
 setInterval(async () => {
   if (startDate < endDate) {
