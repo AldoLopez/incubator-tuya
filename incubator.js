@@ -8,6 +8,7 @@ const device = new TuyAPI({
   issueGetOnConnect: false,
 });
 
+const INTERVAL = 10000;
 const MAX_TEMP = 120;
 const MIN_TEMP = 85;
 const SENSOR_TYPE = 22;
@@ -51,4 +52,4 @@ setInterval(() => {
   if (startDate < endDate) {
     exec();
   }
-}, 5000);
+}, INTERVAL);
