@@ -1,16 +1,16 @@
 require('dotenv').config();
 const TuyAPI = require('tuyapi');
 const sensor = require('node-dht-sensor').promises;
-const winston = require('winston');
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, printf } = format;
 
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
+const myFormat = printf(({ level, message, label, timestamp }) => {
+  return `${timestamp} [${label}] ${level}: ${message}`;
+});
+
+const logger = createLogger({
+  format: combine(label({ label: 'right meow!' }), timestamp(), myFormat),
+  transports: [new transports.Console()],
 });
 
 const device = new TuyAPI({
@@ -62,7 +62,7 @@ async function exec() {
 
 const startDate = new Date();
 const endDate = new Date(new Date().getTime() + 60 * 60 * 1000 * 24);
-logger.info(`Ending on ${endDate.toLocaleDateString()}`);
+logger.info(`Ending on ${endDate}`);
 setInterval(async () => {
   if (startDate < endDate) {
     exec();
