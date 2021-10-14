@@ -10,7 +10,10 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 
 const logger = createLogger({
   format: combine(label({ label: 'right meow!' }), timestamp(), myFormat),
-  transports: [new transports.Console()],
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
 });
 
 const device = new TuyAPI({
