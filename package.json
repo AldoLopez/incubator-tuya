@@ -7,7 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "node-dht-sensor": "^0.4.3",
     "tuyapi": "codetheweb/tuyapi",
-    "node-dht-sensor": "^0.4.3"
+    "winston": "^3.3.3"
   }
 }
